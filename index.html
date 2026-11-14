@@ -114,9 +114,18 @@
   <footer>Basit Sayfam · 2026</footer>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.min.js"></script>
 <script>
   let n = 0;
   const out = document.getElementById("count");
-  document.getElementById("add").addEventListener("click", () => { out.textContent = ++n; });
+  const GOAL = 5;
+  function celebrate() {
+    if (typeof confetti !== "function") return;
+    confetti({ particleCount: 140, spread: 80, origin: { y: 0.7 }, disableForReducedMotion: true });
+  }
+  document.getElementById("add").addEventListener("click", () => {
+    out.textContent = ++n;
+    if (n === GOAL) celebrate();
+  });
   document.getElementById("reset").addEventListener("click", () => { n = 0; out.textContent = n; });
 </script>
